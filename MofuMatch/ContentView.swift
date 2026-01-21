@@ -68,6 +68,13 @@ struct ContentView: View {
                 }
                 
             }
+            .alert("Clear!", isPresented: $viewModel.isGameOver){
+                Button("Try again"){
+                    viewModel.startNewGame()
+                }
+            } message: {
+                Text("You've matched all the cards!")
+            }
         }
     }
     

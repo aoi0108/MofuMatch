@@ -3,6 +3,7 @@ import SwiftUI
 class GameViewModel: ObservableObject {
     
     @Published var cards: [Card] = []
+    @Published var isGameOver = false
     
    
     private var firstFlippedCardID: UUID?
@@ -34,6 +35,7 @@ class GameViewModel: ObservableObject {
         
         cards = newCards.shuffled()
         firstFlippedCardID = nil
+        isGameOver = false
     }
     
     func choose(_ card: Card) {
@@ -66,6 +68,10 @@ class GameViewModel: ObservableObject {
             
             cards[index].isFaceUp = true
             firstFlippedCardID = card.id
+        }
+        
+        if cards.allSatisfy({ $0.isMatched == true}){
+            isGameOver = true
         }
     }
 }
